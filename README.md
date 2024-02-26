@@ -1,3 +1,6 @@
+> [!NOTE]
+> This is a work in progress. There will likely be many changes over the next few weeks.
+
 # MongoDB Core Compatibilty Test
 
 In this scenario, we are performing a MongoDB API test aimed at verifying compatibility, reliability, and performance across different implementations of the MongoDB document model. It's important to note that our focus is on the core product itself, and we are not evaluating or testing specific cloud providers. The purpose of this test is to validate the behavior of the MongoDB API when interacting with various MongoDB clones, taking into consideration potential differences in their underlying architecture or features.

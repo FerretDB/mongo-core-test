@@ -14,7 +14,7 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 ## Instructions
 
 #### Clone Repos
-* `git clone https://github.com/toddstoffel/mongo-core-test.git`
+* `git clone https://github.com/mongodb-developer/mongo-core-test.git`
 * `cd mongo-core-test`
 * `git clone https://github.com/mongodb/mongo.git`
 

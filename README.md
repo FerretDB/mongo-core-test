@@ -1,6 +1,3 @@
-> [!NOTE]
-> This is a work in progress. There will likely be many changes over the next few weeks.
-
 # MongoDB Core Compatibilty Test
 
 In this scenario, we are performing a MongoDB API test aimed at verifying compatibility, reliability, and performance across different implementations of the MongoDB document model. It's important to note that our focus is on the core product itself, and we are not evaluating or testing specific cloud providers. The purpose of this test is to validate the behavior of the MongoDB API when interacting with various MongoDB clones, taking into consideration potential differences in their underlying architecture or features.
@@ -36,9 +33,10 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 * `docker compose -f ferretdb.yml up -d`
 
 ## Compatibilty Results By MongoDB Version
-| Product Tested | MongoDB 5.0.x | MongoDB 7.0.x | Works with [Compass](https://www.mongodb.com/products/tools/compass) |
+| Product Tested | MongoDB 5.x | MongoDB 7.x | Works with [Compass](https://www.mongodb.com/products/tools/compass) |
 | :------ | :--:| :--:| :--: |
 | MongoDB 5.0.24 | 100% | 96.17% | :heavy_check_mark: |
 | MongoDB 7.0.5 | 99.86% | 100% | :heavy_check_mark: |
+| SingleStore Kai™ | 38.96% | 37.02% | :heavy_check_mark: |
 | FerretDB 1.20.1 | 36.35% | 35.01% | :x: |
 | MariaDB MaxScale 23.08.4 | 34.16% | 33.03% | :x: |

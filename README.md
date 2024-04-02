@@ -16,7 +16,7 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 * `git clone https://github.com/mongodb/mongo.git`
 
 #### Run Tests
-* Edit [run.py](run.py) "User Variables" _(User credentials only required for FerretDB test)_
+* Edit [run.py](run.py) "User Variables"
 * `python3 run.py [5 or 7]`
 
 ## Optional Instructions To Create Test Environment

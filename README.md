@@ -5,7 +5,7 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 ## Prerequisites:
 * Install [Git](https://git-scm.com/downloads)
 * Install [Docker](https://www.docker.com/products/docker-desktop/)
-* Download [Mongo 5.0.24 client](https://www.mongodb.com/try/download/community) to your preferred bin folder
+* Download [Mongo 5.0.26 client](https://www.mongodb.com/try/download/community) to your preferred bin folder
 * Install pymongo: `pip3 install pymongo`
 
 ## Instructions

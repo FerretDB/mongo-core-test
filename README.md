@@ -20,17 +20,17 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 * `python3 run.py [5 or 7]`
 
 ## Optional Instructions To Create Test Environment
-#### Use [MongoDB 5.0.24](https://www.mongodb.com/try/download/community) Docker Container:
-  * `docker run --name mongo -d -p 27017:27017 mongo:5.0.24`
+#### Use [MongoDB 5.0.26](https://www.mongodb.com/try/download/community) Docker Container:
+  * `docker compose -f mongo5.yml up -d`
 
-#### Use [MongoDB 7.0.5](https://www.mongodb.com/try/download/community) Docker Container:
-  * `docker run --name mongo -d -p 27017:27017 mongo:7.0.5`
+#### Use [MongoDB 7.0.7](https://www.mongodb.com/try/download/community) Docker Container:
+  * `docker compose -f mongo7.yml up -d`
 
 #### Use [MaxScale 23.08.4](https://mariadb.com/kb/en/mariadb-maxscale-2308-nosql-protocol-module/) Docker Container:
 * `docker compose -f maxscale.yml up -d`
 
 #### Use [FerretDB 1.20.1](https://www.ferretdb.com) Docker Container:
-* `docker compose -f ferretdb.yml up -d`
+* `docker compose -f ferret.yml up -d`
 
 ## Compatibilty Results By MongoDB Version
 | Product Tested | MongoDB 5.x | MongoDB 7.x | Works with [Compass](https://www.mongodb.com/products/tools/compass) |

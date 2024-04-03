@@ -1,0 +1,15 @@
+---
+services:
+  mongo:
+    image: mongodb/mongodb-community-server:7.0.7-ubuntu2204
+    container_name: mongo
+    restart: on-failure
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+
+networks:
+  default:
+    name: mongo

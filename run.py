@@ -13,16 +13,24 @@ LOG_FILENAME = "failed.log"
 SKIP_DIRECTORY = "skip"
 COMMON_SKIP_FILE = "common.txt"
 LOG_FILE_PATH = os.path.join(LOG_DIRECTORY, LOG_FILENAME)
-TEST_DIRECTORY = os.path.join(os.getcwd(), 'mongo/jstests/core')
+TEST_DIRECTORY = os.path.join(os.getcwd(), 'mongo/jstests')
 COMMON_LIST = os.path.join(SKIP_DIRECTORY, COMMON_SKIP_FILE)
 
 # User Variables (Consider moving these to a config file or environment variables)
 MONGO_HOST = '127.0.0.1'
 MONGO_PORT = 27017
-MONGO_USERNAME = ''
-MONGO_PASSWORD = ''
+MONGO_USERNAME = 'admin'
+MONGO_PASSWORD = 'password'
 AUTHENTICATION_DATABASE = 'admin'
-AUTHENTICATION_MECHANISM = 'PLAIN'
+AUTHENTICATION_MECHANISM = 'SCRAM-SHA-1'
+USE_TLS = 'false'
+LOAD_BALANCE = 'false'
+
+if MONGO_USERNAME and MONGO_PASSWORD:
+    creds = f"{MONGO_USERNAME}:{MONGO_PASSWORD}@"
+    auth_part = f"?authMechanism={AUTHENTICATION_MECHANISM}&tls={USE_TLS}&loadBalanced={LOAD_BALANCE}"
+else:
+    creds, auth_part = "", ""
 
 # Check if MongoDB version is valid.
 def is_valid_version(version):
@@ -51,37 +59,21 @@ def validate_connection(uri):
 
 # Create MongoDB URI from user variables.
 def create_mongo_uri():
-    if MONGO_USERNAME and MONGO_PASSWORD:
-        creds = f"{MONGO_USERNAME}:{MONGO_PASSWORD}@"
-        auth_part = f"?authMechanism={AUTHENTICATION_MECHANISM}"
-    else:
-        creds, auth_part = "", ""
-    
-    return f"mongodb://{creds}{MONGO_HOST}:{MONGO_PORT}/{AUTHENTICATION_DATABASE}{auth_part}"
+    return f"mongodb://{creds}{MONGO_HOST}:{MONGO_PORT}/{auth_part}"
 
 # Build the mongo command with the necessary arguments.
 def build_mongo_command(script_path):
     mongo_command = [
         'mongo',
-        f'--host={MONGO_HOST}',
-        f'--port={MONGO_PORT}'
+        f"mongodb://{creds}{MONGO_HOST}:{MONGO_PORT}/{auth_part}"
     ]
-
-    if MONGO_USERNAME:
-        mongo_command.extend([
-            f'--username={MONGO_USERNAME}',
-            f'--password={MONGO_PASSWORD}',
-            f'--authenticationDatabase={AUTHENTICATION_DATABASE}',
-            f'--authenticationMechanism={AUTHENTICATION_MECHANISM}'
-        ])
-
     mongo_command.append(script_path)
     return mongo_command
 
 # Run an individual script using subprocess.
 def run_script(script_path):
     mongo_command = build_mongo_command(script_path)
-    
+    #print(mongo_command)
     try:
         subprocess.run(mongo_command, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         return True

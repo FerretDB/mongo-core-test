@@ -37,6 +37,6 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 | :------ | :--:| :--:| :--: |
 | MongoDB 5.0.26 | 100% | 96.73% | :heavy_check_mark: |
 | MongoDB 7.0.7 | 100% | 100% | :heavy_check_mark: |
-| SingleStore Kai™ | 38.96% | 37.02% | :heavy_check_mark: |
+| SingleStore Kai™ | 45.37% | 45.98% | :heavy_check_mark: |
 | FerretDB 1.20.1 | 37.83% | 36.60% | :x: |
 | MariaDB MaxScale 23.08.4 | 33.88% | 33.03% | :x: |

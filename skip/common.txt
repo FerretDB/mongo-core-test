@@ -2,3 +2,4 @@
 /administrative/current_op/currentop.js
 /administrative/set_param1.js
 /fsync.js
+/query/in_expression_plan_cache.js

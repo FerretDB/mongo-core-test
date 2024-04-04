@@ -17,6 +17,7 @@ TEST_DIRECTORY = os.path.join(os.getcwd(), 'mongo/jstests/core')
 COMMON_LIST = os.path.join(SKIP_DIRECTORY, COMMON_SKIP_FILE)
 
 # User Variables (Consider moving these to a config file or environment variables)
+# Note: No username/password required for MaxScale test
 MONGO_HOST = '127.0.0.1'
 MONGO_PORT = 27017
 MONGO_USERNAME = 'admin'

@@ -1,9 +1,4 @@
-/core/administrative/apply_ops/apply_ops1.js
-/core/administrative/current_op/currentop.js
-/core/administrative/set_param1.js
-/core/fsync.js
-/fle2/shard_collection.js
-/hooks/crud_client.js
-/noPassthroughWithMongod/ttl1.js
-/resmoke_selftest/end2end/timeout/fixture/timeout0.js
-/ssl/x509_startup_warning.js
+/administrative/apply_ops/apply_ops1.js
+/administrative/current_op/currentop.js
+/administrative/set_param1.js
+/fsync.js

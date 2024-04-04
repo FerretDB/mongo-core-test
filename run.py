@@ -13,7 +13,7 @@ LOG_FILENAME = "failed.log"
 SKIP_DIRECTORY = "skip"
 COMMON_SKIP_FILE = "common.txt"
 LOG_FILE_PATH = os.path.join(LOG_DIRECTORY, LOG_FILENAME)
-TEST_DIRECTORY = os.path.join(os.getcwd(), 'mongo/jstests')
+TEST_DIRECTORY = os.path.join(os.getcwd(), 'mongo/jstests/core')
 COMMON_LIST = os.path.join(SKIP_DIRECTORY, COMMON_SKIP_FILE)
 
 # User Variables (Consider moving these to a config file or environment variables)

@@ -33,7 +33,7 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 * `docker compose -f ferret.yml up -d`
 
 ## Compatibilty Results By MongoDB Version
-| Product Tested | MongoDB 5.x | MongoDB 7.x | Works with [Compass](https://www.mongodb.com/products/tools/compass) |
+| Product Tested | vs MongoDB 5 | vs MongoDB 7 | Works with [Compass](https://www.mongodb.com/products/tools/compass) |
 | :------ | :--:| :--:| :--: |
 | MongoDB 5.0.26 | 100% | 96.73% | :heavy_check_mark: |
 | MongoDB 7.0.7 | 100% | 100% | :heavy_check_mark: |

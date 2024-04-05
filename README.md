@@ -35,7 +35,7 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 ## Compatibilty Results By MongoDB Version
 | Product Tested | vs MongoDB 5 | vs MongoDB 7 | Works with [Compass](https://www.mongodb.com/products/tools/compass) |
 | :------ | :--:| :--:| :--: |
-| MongoDB 5.0.26 | 100% | 96.73% | :heavy_check_mark: |
+| MongoDB 5.0.26 | 100% | 96.70% | :heavy_check_mark: |
 | MongoDB 7.0.7 | 100% | 100% | :heavy_check_mark: |
 | SingleStore Kai™ | 46.96% | 45.85% | :heavy_check_mark: |
 | FerretDB 1.20.1 | 37.83% | 36.60% | :x: |

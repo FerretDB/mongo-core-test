@@ -3,6 +3,7 @@
 import os
 import subprocess
 import sys
+import time
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure, OperationFailure
 
@@ -13,7 +14,7 @@ LOG_FILENAME = "failed.log"
 SKIP_DIRECTORY = "skip"
 COMMON_SKIP_FILE = "common.txt"
 LOG_FILE_PATH = os.path.join(LOG_DIRECTORY, LOG_FILENAME)
-TEST_DIRECTORY = os.path.join(os.getcwd(), 'mongo/jstests/core')
+TEST_DIRECTORY = os.path.join(os.getcwd(), 'mongo/jstests')
 COMMON_LIST = os.path.join(SKIP_DIRECTORY, COMMON_SKIP_FILE)
 
 # User Variables (Consider moving these to a config file or environment variables)
@@ -109,6 +110,7 @@ def find_js_files(directory, mongo_version):
 
 # Main function.
 if __name__ == '__main__':
+    start_time = time.time()
     # Ensure there is at least one argument provided and it's valid
     if len(sys.argv) < 2 or not is_valid_version(sys.argv[1]):
         print("You must choose a MongoDB server version to compare against (5 or 7)")
@@ -129,20 +131,29 @@ if __name__ == '__main__':
 
     for idx, script_path in enumerate(script_files, start=1):
         filename = os.path.basename(script_path)
+
+        script_start = time.time()  # Start time for the current script
         success = run_script(script_path)
+        script_end = time.time()    # End time for the current script
+
+        # Calculate elapsed time for this script
+        elapsed_time = script_end - script_start
 
         if success:
             success_count += 1
-            print(f"Passed test {idx}/{total_scripts}: {filename}")
+            print(f"Passed test {idx}/{total_scripts}: {filename} (Time: {elapsed_time:.4f}s)")
         else:
-            print("\033[91m" + f"Failed test {idx}/{total_scripts}: {filename}" + "\033[0m")
+            print("\033[91m" + f"Failed test {idx}/{total_scripts}: {filename} (Time: {elapsed_time:.4f}s)" + "\033[0m")
             failed_scripts.append(script_path)
 
+    end_time = time.time()
+    total_time = end_time - start_time
     success_percentage = (success_count / total_scripts) * 100 if total_scripts > 0 else 0
     summary_log = (
         f"\nTotal Tests Attempted: {total_scripts}\n"
         f"Total Successful Executions: {success_count}\n"
         f"Percentage Successful: {success_percentage:.2f}%\n"
+        f"Total Execution Time: {total_time:.2f} seconds\n"
     )
     print(summary_log)
 

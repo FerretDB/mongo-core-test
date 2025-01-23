@@ -37,7 +37,7 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 
 ## Compatibilty Results By MongoDB Version
 | Product Tested | vs MongoDB 5.x | vs MongoDB 7.x | vs MongodB 8.x | Works with [Compass](https://www.mongodb.com/products/tools/compass) |
-| :------ | :--:| :--:| :--: |
+| :------ | :--:| :--:| :--: | :--: |
 | MongoDB 5.0.30 | 100% | 96.01% | 94.39% | :heavy_check_mark: |
 | MongoDB 7.0.11 | 100% | 100% | 98.20% | :heavy_check_mark: |
 | MongoDB 8.0.4 | 100% | 100% | 100% | :heavy_check_mark: |

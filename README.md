@@ -5,7 +5,7 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 ## Prerequisites:
 * Install [Git](https://git-scm.com/downloads)
 * Install [Docker](https://www.docker.com/products/docker-desktop/)
-* Download [Mongo 5.0.26 client](https://www.mongodb.com/try/download/community) to your preferred bin folder
+* Download [Mongo 5.0.30 client](https://www.mongodb.com/try/download/community) to your preferred bin folder
 * Install pymongo: `pip3 install pymongo`
 
 ## Instructions
@@ -17,26 +17,30 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 
 #### Run Tests
 * Edit [run.py](run.py) "User Variables"
-* `python3 run.py [5 or 7]`
+* `python3 run.py [5, 7 or 8]`
 
 ## Optional Instructions To Create Test Environment
-#### Use [MongoDB 5.0.26](https://www.mongodb.com/try/download/community) Docker Container:
+#### Use [MongoDB 5.0.30](https://www.mongodb.com/try/download/community) Docker Container:
   * `docker compose -f mongo5.yml up -d`
 
-#### Use [MongoDB 7.0.7](https://www.mongodb.com/try/download/community) Docker Container:
+#### Use [MongoDB 7.0.11](https://www.mongodb.com/try/download/community) Docker Container:
   * `docker compose -f mongo7.yml up -d`
 
+#### Use [MongoDB 8.0.4](https://www.mongodb.com/try/download/community) Docker Container:
+  * `docker compose -f mongo8.yml up -d`  
+
 #### Use [MaxScale 23.08.4](https://mariadb.com/kb/en/mariadb-maxscale-2308-nosql-protocol-module/) Docker Container:
-* `docker compose -f maxscale.yml up -d`
+  * `docker compose -f maxscale.yml up -d`
 
 #### Use [FerretDB 1.20.1](https://www.ferretdb.com) Docker Container:
-* `docker compose -f ferret.yml up -d`
+  * `docker compose -f ferret.yml up -d`
 
 ## Compatibilty Results By MongoDB Version
-| Product Tested | vs MongoDB 5.x | vs MongoDB 7.x | Works with [Compass](https://www.mongodb.com/products/tools/compass) |
+| Product Tested | vs MongoDB 5.x | vs MongoDB 7.x | vs MongodB 8.x | Works with [Compass](https://www.mongodb.com/products/tools/compass) |
 | :------ | :--:| :--:| :--: |
-| MongoDB 5.0.26 | 100% | 96.01% | :heavy_check_mark: |
-| MongoDB 7.0.7 | 100% | 100% | :heavy_check_mark: |
-| SingleStore Kai™ | 46.96% | 45.85% | :heavy_check_mark: |
-| FerretDB 1.20.1 | 37.42% | 36.34% | :x: |
-| MariaDB MaxScale 23.08.4 | 33.19% | 31.93% | :x: |
+| MongoDB 5.0.30 | 100% | 96.01% | 94.39% | :heavy_check_mark: |
+| MongoDB 7.0.11 | 100% | 100% | 98.20% | :heavy_check_mark: |
+| MongoDB 8.0.4 | 100% | 100% | 100% | :heavy_check_mark: |
+| SingleStore Kai™ | 46.96% | 45.85% | N/A% | :heavy_check_mark: |
+| FerretDB 1.20.1 | 37.42% | 36.34% | N/A% | :x: |
+| MariaDB MaxScale 23.08.4 | 33.19% | 31.93% | N/A% | :x: |

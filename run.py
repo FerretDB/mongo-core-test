@@ -8,7 +8,7 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure, OperationFailure
 
 # Constants
-VERSIONS = ['5', '7']
+VERSIONS = ['5', '7', '8']
 LOG_DIRECTORY = "logs"
 LOG_FILENAME = "failed.log"
 SKIP_DIRECTORY = "skip"
@@ -113,7 +113,7 @@ if __name__ == '__main__':
     start_time = time.time()
     # Ensure there is at least one argument provided and it's valid
     if len(sys.argv) < 2 or not is_valid_version(sys.argv[1]):
-        print("You must choose a MongoDB server version to compare against (5 or 7)")
+        print("You must choose a MongoDB server version to compare against (5, 7 or 8)")
         print(f"Example usage: python3 {sys.argv[0]} 5")
         sys.exit(1)
 

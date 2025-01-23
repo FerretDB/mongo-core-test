@@ -1,0 +1,16 @@
+/aggregation/sources/addFields/add_fields_adds_to_missing_fields.js
+/aggregation/sources/group/group_by_empty_object.js
+/aggregation/sources/redact/root_redact.js
+/aggregation/sources/unwind/unwind_sort.js
+/core/index/geo/negated_geo_queries.js
+/core/query/embedded_dollar_prefixed_field_validation.js
+/core/query/find/find9.js
+/core/query/find/find_getmore_cmd.js
+/core/query/find_all_values_at_path_expression.js
+/core/timeseries/geo/timeseries_geonear_mindistance_and_maxdistance.js
+/core/timeseries/query/timeseries_filter_extended_range.js
+/core/write/bypass_empty_ts_replacement.js
+/core/write/bypass_empty_ts_replacement_bulk_write.js
+/core/write/bypass_empty_ts_replacement_timeseries.js
+/core/write/empty_ts_bulk_write.js
+/noPassthroughWithMongod/capped/ttl_index_capped_collection.js

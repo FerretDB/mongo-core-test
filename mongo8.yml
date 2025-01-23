@@ -1,7 +1,7 @@
 ---
 services:
   mongo:
-    image: mongodb/mongodb-community-server:5.0.30-ubuntu2004
+    image: mongodb/mongodb-community-server:8.0.4-ubuntu2204
     container_name: mongo
     restart: on-failure
     ports:

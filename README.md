@@ -29,7 +29,7 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 #### Use [MongoDB 8.0.4](https://www.mongodb.com/try/download/community) Docker Container:
   * `docker compose -f mongo8.yml up -d`  
 
-#### Use [MaxScale 23.08.4](https://mariadb.com/kb/en/mariadb-maxscale-2308-nosql-protocol-module/) Docker Container:
+#### Use [MaxScale 24.02](https://mariadb.com/downloads/community/maxscale/) Docker Container:
   * `docker compose -f maxscale.yml up -d`
 
 #### Use [FerretDB 1.20.1](https://www.ferretdb.com) Docker Container:

@@ -7,11 +7,12 @@ services:
       - MARIADB_ROOT_PASSWORD=password
 
   maxscale:
-    image: mariadb/maxscale:23.08.4
+    image: mariadb/maxscale:latest
     restart: on-failure
     container_name: maxscale
     ports:
       - 27017:27017
+      - 8989:8989
     volumes:
       - ./config/maxscale.cnf:/etc/maxscale.cnf
 

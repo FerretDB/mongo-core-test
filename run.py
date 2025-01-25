@@ -75,11 +75,17 @@ def build_mongo_command(script_path):
 # Run an individual script using subprocess.
 def run_script(script_path):
     mongo_command = build_mongo_command(script_path)
-    #print(mongo_command)
+    print(mongo_command)
     try:
-        subprocess.run(mongo_command, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        subprocess.run(
+            mongo_command,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            timeout=60,  # Set timeout to 60 seconds
+        )
         return True
-    except subprocess.CalledProcessError:
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
         return False
 
 # Find all JS files that are not in the exclusion lists.

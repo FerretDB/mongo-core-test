@@ -38,10 +38,10 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 ## Compatibilty Results By MongoDB Version
 | Product Tested | vs MongoDB 5.x | vs MongoDB 7.x | vs MongodB 8.x | Works with [Compass](https://www.mongodb.com/products/tools/compass) |
 | :------ | :--:| :--:| :--: | :--: |
-| MongoDB 5.0.30 | 100% | 96.01% | 94.39% | :heavy_check_mark: |
-| MongoDB 7.0.11 | 100% | 100% | 98.20% | :heavy_check_mark: |
-| MongoDB 8.0.4 | 100% | 100% | 100% | :heavy_check_mark: |
-| SingleStore Kai | 46.96% | 45.85% | N/A | :heavy_check_mark: |
-| FerretDB 1.20.1 | 37.42% | 36.34% | N/A | :x: |
-| [MariaDB MaxScale 23.08](https://mariadb.com/kb/en/mariadb-maxscale-2308-nosql-protocol-module/) | 33.19% | 31.93% | N/A | :x: |
+| MongoDB 5 | 100% | 96.01% | 94.39% | :heavy_check_mark: |
+| MongoDB 7 | 100% | 100% | 98.20% | :heavy_check_mark: |
+| MongoDB 8 | 100% | 100% | 100% | :heavy_check_mark: |
+| [SingleStore Kai](https://www.singlestore.com/kai/) | 46.96% | 45.85% | N/A | :heavy_check_mark: |
+| FerretDB 1.20 | 37.42% | 36.34% | N/A | :x: |
+| [MariaDB MaxScale 23](https://mariadb.com/kb/en/mariadb-maxscale-2308-nosql-protocol-module/) | 33.19% | 31.93% | N/A | :x: |
 | [Oracle 23ai](https://docs.oracle.com/en/database/oracle/mongodb-api/mgapi/overview-oracle-database-api-mongodb.html) | 35.43% | 34.28% | 33.78% | :heavy_check_mark: |

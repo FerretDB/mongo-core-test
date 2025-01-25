@@ -75,7 +75,7 @@ def build_mongo_command(script_path):
 # Run an individual script using subprocess.
 def run_script(script_path):
     mongo_command = build_mongo_command(script_path)
-    print(mongo_command)
+    # print(mongo_command)
     try:
         subprocess.run(
             mongo_command,

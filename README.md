@@ -29,7 +29,7 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 #### Use [MongoDB 8.0.4](https://www.mongodb.com/try/download/community) Docker Container:
   * `docker compose -f mongo8.yml up -d`  
 
-#### Use [MariaDB MaxScale 24.02](https://mariadb.com/downloads/community/maxscale/) Docker Container:
+#### Use [MariaDB MaxScale](https://mariadb.com/downloads/community/maxscale/) Docker Container:
   * `docker compose -f maxscale.yml up -d`
 
 #### Use [FerretDB 1.24](https://www.ferretdb.com) Docker Container:
@@ -44,4 +44,4 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 | [Oracle 23ai](https://docs.oracle.com/en/database/oracle/mongodb-api/mgapi/overview-oracle-database-api-mongodb.html) | 35.43% | 34.28% | 33.78% | :heavy_check_mark: |
 | [SingleStore Kai](https://www.singlestore.com/kai/) | 46.96% | 45.85% | N/A | :heavy_check_mark: |
 | [FerretDB 1.24](https://docs.ferretdb.io/) | 37.42% | 36.34% | 34.60% | :x: |
-| [MariaDB MaxScale 24](https://mariadb.com/kb/en/mariadb-maxscale-2402-maxscale-2402-nosql-protocol-module/) | 33.19% | 31.93% | 31.44% | :x: |
+| [MaxScale 25.01.1](https://mariadb.com/kb/en/mariadb-maxscale-2501-maxscale-2501-nosql-protocol-module/) | 35.18% | 33.88% | 33.40% | :x: |

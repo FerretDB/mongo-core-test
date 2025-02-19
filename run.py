@@ -25,12 +25,12 @@ MONGO_USERNAME = 'admin'
 MONGO_PASSWORD = 'password'
 AUTHENTICATION_DATABASE = 'admin'
 AUTHENTICATION_MECHANISM = 'SCRAM-SHA-1'
-USE_TLS = 'false'
+USE_SSL = 'false'
 LOAD_BALANCE = 'false'
 
 if MONGO_USERNAME and MONGO_PASSWORD:
     creds = f"{MONGO_USERNAME}:{MONGO_PASSWORD}@"
-    auth_part = f"?authMechanism={AUTHENTICATION_MECHANISM}&tls={USE_TLS}&loadBalanced={LOAD_BALANCE}"
+    auth_part = f"?authMechanism={AUTHENTICATION_MECHANISM}&authSource={AUTHENTICATION_DATABASE}&ssl={USE_SSL}&loadBalanced={LOAD_BALANCE}"
 else:
     creds, auth_part = "", ""
 

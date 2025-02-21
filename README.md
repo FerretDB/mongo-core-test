@@ -41,7 +41,7 @@ In this scenario, we are performing a MongoDB API test aimed at verifying compat
 | MongoDB 5 | 100% | 96.01% | 94.39% | :heavy_check_mark: |
 | MongoDB 7 | 100% | 100% | 98.20% | :heavy_check_mark: |
 | MongoDB 8 | 100% | 100% | 100% | :heavy_check_mark: |
-| [Oracle 23ai](https://docs.oracle.com/en/database/oracle/mongodb-api/mgapi/overview-oracle-database-api-mongodb.html) | 26.70% | 25.99% | 25.67% | :heavy_check_mark: |
+| [Oracle 23ai](https://docs.oracle.com/en/database/oracle/mongodb-api/mgapi/overview-oracle-database-api-mongodb.html) | 33.73% | 32.70% | 32.13% | :heavy_check_mark: |
 | [SingleStore Kai](https://www.singlestore.com/kai/) | 46.96% | 45.85% | N/A | :heavy_check_mark: |
 | [FerretDB 1.24](https://docs.ferretdb.io/) | 37.42% | 36.34% | 34.60% | :x: |
 | [MaxScale 25.01.1](https://mariadb.com/kb/en/mariadb-maxscale-2501-maxscale-2501-nosql-protocol-module/) | 35.18% | 33.88% | 33.40% | :x: |

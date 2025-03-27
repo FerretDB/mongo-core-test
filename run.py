@@ -14,26 +14,9 @@ LOG_FILENAME = "failed.log"
 SKIP_DIRECTORY = "skip"
 COMMON_SKIP_FILE = "common.txt"
 LOG_FILE_PATH = os.path.join(LOG_DIRECTORY, LOG_FILENAME)
-TEST_DIRECTORY = os.path.join(os.getcwd(), "mongo/jstests")
 COMMON_LIST = os.path.join(SKIP_DIRECTORY, COMMON_SKIP_FILE)
 
-# User Variables (Consider moving these to a config file or environment variables)
-# Note: No username/password required for MaxScale test
-MONGO_HOST = "127.0.0.1"
-MONGO_PORT = 27017
-MONGO_USERNAME = "admin"
-MONGO_PASSWORD = "password"
-AUTHENTICATION_DATABASE = "admin"
-AUTHENTICATION_MECHANISM = "SCRAM-SHA-1"
-USE_SSL = "false"
-LOAD_BALANCE = "false"
-
-if MONGO_USERNAME and MONGO_PASSWORD:
-    creds = f"{MONGO_USERNAME}:{MONGO_PASSWORD}@"
-    auth_part = f"?authMechanism={AUTHENTICATION_MECHANISM}&authSource={AUTHENTICATION_DATABASE}&ssl={USE_SSL}&loadBalanced={LOAD_BALANCE}"
-else:
-    creds, auth_part = "", ""
-
+PING_DATABASE = "admin"
 
 # Check if MongoDB version is valid.
 def is_valid_version(version):
@@ -51,7 +34,7 @@ def check_list_existence(file_path, file_description):
 def validate_connection(uri):
     try:
         client = MongoClient(uri, serverSelectionTimeoutMS=5000)
-        client[AUTHENTICATION_DATABASE].command("ping")
+        client[PING_DATABASE].command("ping")
         print("Connected successfully to database")
 
     except ConnectionFailure:
@@ -63,21 +46,9 @@ def validate_connection(uri):
         sys.exit(1)
 
 
-# Create MongoDB URI from user variables.
-def create_mongo_uri():
-    return f"mongodb://{creds}{MONGO_HOST}:{MONGO_PORT}/{auth_part}"
-
-
-# Build the mongo command with the necessary arguments.
-def build_mongo_command(script_path):
-    mongo_command = ["mongo", f"mongodb://{creds}{MONGO_HOST}:{MONGO_PORT}/{auth_part}"]
-    mongo_command.append(script_path)
-    return mongo_command
-
-
 # Run an individual script using subprocess.
-def run_script(script_path):
-    mongo_command = build_mongo_command(script_path)
+def run_script(uri, script_path):
+    mongo_command = ["mongo", uri, script_path]
     # print(mongo_command)
     try:
         subprocess.run(
@@ -96,13 +67,13 @@ def run_script(script_path):
 def find_js_files(directory, mongo_version):
     exclusions = set()
     with open(COMMON_LIST, "r") as f:
-        exclusions.update([TEST_DIRECTORY + line.strip() for line in f])
+        exclusions.update([directory + line.strip() for line in f])
 
     # Add specific mongo version exclusions.
     mongo_exclusions = f"{SKIP_DIRECTORY}/mongo{mongo_version}.txt"
     check_list_existence(mongo_exclusions, mongo_exclusions)
     with open(mongo_exclusions, "r") as f:
-        exclusions.update([TEST_DIRECTORY + line.strip() for line in f])
+        exclusions.update([directory + line.strip() for line in f])
 
     js_files = []
     for root, dirs, files in os.walk(directory):
@@ -123,19 +94,21 @@ def find_js_files(directory, mongo_version):
 if __name__ == "__main__":
     start_time = time.time()
     # Ensure there is at least one argument provided and it's valid
-    if len(sys.argv) < 2 or not is_valid_version(sys.argv[1]):
+    if len(sys.argv) < 4 or not is_valid_version(sys.argv[1]):
         print("You must choose a MongoDB server version to compare against (5, 7 or 8)")
-        print(f"Example usage: python3 {sys.argv[0]} 5")
+        print(f"Example usage: python3 {sys.argv[0]} 5 mongodb://127.0.0.1:27001 /path/to/mongo/jstests")
         sys.exit(1)
 
     version = sys.argv[1]
+    uri = sys.argv[2]
+    test_directory = sys.argv[3]
+
     os.makedirs(LOG_DIRECTORY, exist_ok=True)
     mongo_list = os.path.join(SKIP_DIRECTORY, f"mongo{version}.txt")
-    uri = create_mongo_uri()
 
     validate_connection(uri)
 
-    script_files = sorted(find_js_files(TEST_DIRECTORY, version))
+    script_files = sorted(find_js_files(test_directory, version))
     total_scripts = len(script_files)
     success_count = 0
     failed_scripts = []
@@ -144,7 +117,7 @@ if __name__ == "__main__":
         filename = os.path.basename(script_path)
 
         script_start = time.time()  # Start time for the current script
-        success = run_script(script_path)
+        success = run_script(uri, script_path)
         script_end = time.time()  # End time for the current script
 
         # Calculate elapsed time for this script
@@ -179,6 +152,6 @@ if __name__ == "__main__":
     if failed_scripts:
         with open(LOG_FILE_PATH, "w") as log_file:
             for failed_script in failed_scripts:
-                relative_path = os.path.relpath(failed_script, TEST_DIRECTORY)
+                relative_path = os.path.relpath(failed_script, test_directory)
                 log_file.write(f"{relative_path}\n")
         print(f"Failed scripts have been logged to: {LOG_FILE_PATH}")

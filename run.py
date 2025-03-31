@@ -9,11 +9,10 @@ from pymongo.errors import ConnectionFailure, OperationFailure
 
 # Constants
 VERSIONS = ["5", "7", "8"]
-LOG_DIRECTORY = "logs"
 LOG_FILENAME = "failed.log"
+SUMMARY_FILENAME = "summary.txt"
 SKIP_DIRECTORY = "skip"
 COMMON_SKIP_FILE = "common.txt"
-LOG_FILE_PATH = os.path.join(LOG_DIRECTORY, LOG_FILENAME)
 COMMON_LIST = os.path.join(SKIP_DIRECTORY, COMMON_SKIP_FILE)
 
 # Default values are used if environment variables are unset
@@ -27,6 +26,7 @@ AUTHENTICATION_MECHANISM = os.environ.get("AUTHENTICATION_MECHANISM", "SCRAM-SHA
 USE_SSL = os.environ.get("USE_SSL", "false")
 LOAD_BALANCE = os.environ.get("LOAD_BALANCE", "false")
 TEST_DIRECTORY = os.environ.get("TEST_DIRECTORY", os.path.join(os.getcwd(), "mongo/jstests"))
+LOG_DIRECTORY = os.environ.get("LOG_DIRECTORY", "logs")
 
 if MONGO_USERNAME and MONGO_PASSWORD:
     creds = f"{MONGO_USERNAME}:{MONGO_PASSWORD}@"
@@ -176,9 +176,15 @@ if __name__ == "__main__":
     )
     print(summary_log)
 
+    summary_file_path = os.path.join(LOG_DIRECTORY, SUMMARY_FILENAME)
+    with open(summary_file_path, "w") as summary_file:
+        summary_file.write(summary_log)
+        print(f"Summary have been written to: {summary_file_path}")
+
+    log_file_path = os.path.join(LOG_DIRECTORY, LOG_FILENAME)
     if failed_scripts:
-        with open(LOG_FILE_PATH, "w") as log_file:
+        with open(log_file_path, "w") as log_file:
             for failed_script in failed_scripts:
                 relative_path = os.path.relpath(failed_script, TEST_DIRECTORY)
                 log_file.write(f"{relative_path}\n")
-        print(f"Failed scripts have been logged to: {LOG_FILE_PATH}")
+        print(f"Failed scripts have been logged to: {log_file_path}")

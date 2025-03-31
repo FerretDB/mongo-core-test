@@ -1,4 +1,0 @@
-[submodule "mongo"]
-	path = mongo
-	url = https://github.com/mongodb/mongo.git
-	branch = main

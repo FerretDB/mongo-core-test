@@ -14,7 +14,6 @@ LOG_FILENAME = "failed.log"
 SKIP_DIRECTORY = "skip"
 COMMON_SKIP_FILE = "common.txt"
 LOG_FILE_PATH = os.path.join(LOG_DIRECTORY, LOG_FILENAME)
-TEST_DIRECTORY = os.path.join(os.getcwd(), "mongo/jstests")
 COMMON_LIST = os.path.join(SKIP_DIRECTORY, COMMON_SKIP_FILE)
 
 # Default values are used if environment variables are unset
@@ -27,6 +26,7 @@ AUTHENTICATION_DATABASE = os.environ.get("AUTHENTICATION_DATABASE", "admin")
 AUTHENTICATION_MECHANISM = os.environ.get("AUTHENTICATION_MECHANISM", "SCRAM-SHA-1")
 USE_SSL = os.environ.get("USE_SSL", "false")
 LOAD_BALANCE = os.environ.get("LOAD_BALANCE", "false")
+TEST_DIRECTORY = os.environ.get("TEST_DIRECTORY", os.path.join(os.getcwd(), "mongo/jstests"))
 
 if MONGO_USERNAME and MONGO_PASSWORD:
     creds = f"{MONGO_USERNAME}:{MONGO_PASSWORD}@"

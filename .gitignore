@@ -1,6 +1,2 @@
 /logs/*
-
-# venv
-bin/
-lib/
-pyvenv.cfg
+/mongo

@@ -58,7 +58,7 @@ def validate_connection(uri):
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
-            timeout=5,
+            timeout=30,
         )
         print("Connected successfully to database")
     except subprocess.TimeoutExpired:

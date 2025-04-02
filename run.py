@@ -28,7 +28,7 @@ AUTHENTICATION_MECHANISM = "SCRAM-SHA-1"
 USE_SSL = "false"
 LOAD_BALANCE = "false"
 TEST_DIRECTORY = os.environ.get("TEST_DIRECTORY", os.path.join(os.getcwd(), "mongo/jstests"))
-DOCKER_COMMAND = f"docker compose -f legacy-mongo.yml run -v {TEST_DIRECTORY}:{DOCKER_DIRECTORY} legacy-mongo mongo"
+DOCKER_COMMAND = f"docker compose -f legacy-mongo.yml run -rm -v {TEST_DIRECTORY}:{DOCKER_DIRECTORY} legacy-mongo mongo"
 
 if MONGO_USERNAME and MONGO_PASSWORD:
     creds = f"{MONGO_USERNAME}:{MONGO_PASSWORD}@"

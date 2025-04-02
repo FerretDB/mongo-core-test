@@ -19,7 +19,7 @@ DOCKER_DIRECTORY = "/jstests"
 
 # User Variables (Consider moving these to a config file or environment variables)
 # Note: No username/password required for MaxScale test
-MONGO_HOST = os.environ.get("MONGO_HOST", "127.0.0.1")
+MONGO_HOST = os.environ.get("MONGO_HOST", "host.docker.internal")
 MONGO_PORT = os.environ.get("MONGO_PORT", 27017)
 MONGO_USERNAME = os.environ.get("MONGO_USERNAME", "admin")
 MONGO_PASSWORD = os.environ.get("MONGO_PASSWORD", "password")

@@ -15,6 +15,7 @@ SKIP_DIRECTORY = "skip"
 COMMON_SKIP_FILE = "common.txt"
 LOG_FILE_PATH = os.path.join(LOG_DIRECTORY, LOG_FILENAME)
 COMMON_LIST = os.path.join(SKIP_DIRECTORY, COMMON_SKIP_FILE)
+DOCKER_DIRECTORY = "/jstests"
 
 # User Variables (Consider moving these to a config file or environment variables)
 # Note: No username/password required for MaxScale test
@@ -27,8 +28,7 @@ AUTHENTICATION_MECHANISM = "SCRAM-SHA-1"
 USE_SSL = "false"
 LOAD_BALANCE = "false"
 TEST_DIRECTORY = os.environ.get("TEST_DIRECTORY", os.path.join(os.getcwd(), "mongo/jstests"))
-EXEC_DIRECTORY = os.environ.get("EXEC_DIRECTORY", TEST_DIRECTORY) # if docker is used, set this to the scripts directory in the container
-MONGO_COMMAND = os.environ.get("MONGO_COMMAND", "mongo")
+DOCKER_COMMAND = f"docker compose -f legacy-mongo.yml run -v {TEST_DIRECTORY}:{DOCKER_DIRECTORY} legacy-mongo mongo"
 
 if MONGO_USERNAME and MONGO_PASSWORD:
     creds = f"{MONGO_USERNAME}:{MONGO_PASSWORD}@"
@@ -51,7 +51,7 @@ def check_list_existence(file_path, file_description):
 
 # Validate MongoDB connectivity and credentials.
 def validate_connection(uri):
-    ping_command = MONGO_COMMAND.split() + ["--eval", "db.runCommand({ping: 1})", uri]
+    ping_command = DOCKER_COMMAND.split() + ["--eval", "db.runCommand({ping: 1})", uri]
     try:
         subprocess.run(
             ping_command,
@@ -73,14 +73,14 @@ def create_mongo_uri():
 
 # Build the mongo command with the necessary arguments.
 def build_mongo_command(script_path):
-    mongo_command = MONGO_COMMAND.split() + [f"mongodb://{creds}{MONGO_HOST}:{MONGO_PORT}/{auth_part}"]
+    mongo_command = DOCKER_COMMAND.split() + [f"mongodb://{creds}{MONGO_HOST}:{MONGO_PORT}/{auth_part}"]
     mongo_command.append(script_path)
     return mongo_command
 
 
 # Run an individual script using subprocess.
-def run_script(test_directory, script_path):
-    script_path = os.path.join(test_directory, script_path)
+def run_script(script_path):
+    script_path = os.path.join(DOCKER_DIRECTORY, script_path)
     mongo_command = build_mongo_command(script_path)
     # print(mongo_command)
     try:
@@ -149,7 +149,7 @@ if __name__ == "__main__":
         filename = os.path.basename(script_path)
 
         script_start = time.time()  # Start time for the current script
-        success = run_script(EXEC_DIRECTORY, script_path)
+        success = run_script(script_path)
         script_end = time.time()  # End time for the current script
 
         # Calculate elapsed time for this script

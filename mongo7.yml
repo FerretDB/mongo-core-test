@@ -10,6 +10,15 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
 
+  legacy-mongo:
+    image: mongodb/mongodb-community-server:5.0.30-ubuntu2004
+    container_name: legacy-mongo
+    command: sleep 86400
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ${TEST_DIRECTORY:-./mongo/jstests}:/jstests
+
 networks:
   default:
     name: mongo

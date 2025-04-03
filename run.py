@@ -26,7 +26,7 @@ AUTHENTICATION_MECHANISM = "SCRAM-SHA-1"
 USE_SSL = "false"
 LOAD_BALANCE = "false"
 TEST_DIRECTORY = os.environ.get("TEST_DIRECTORY", os.path.join(os.getcwd(), "mongo/jstests"))
-DOCKER_COMMAND = f"docker compose exec legacy-mongo mongo"
+DOCKER_COMMAND = f"docker compose exec legacy-mongo mongo" # requires envVar set for compose file such as `export COMPOSE_FILE=mongo5.yml`
 
 if MONGO_USERNAME and MONGO_PASSWORD:
     creds = f"{MONGO_USERNAME}:{MONGO_PASSWORD}@"
@@ -116,6 +116,7 @@ def find_js_files(directory, mongo_version):
             if file.endswith(".js"):
                 full_path = os.path.join(root, file)
                 relative_path = os.path.relpath(full_path, directory)
+                # exclusions files such as `skip/common.txt` contain path prefixed with "/"
                 if os.path.join("/", relative_path) not in exclusions:
                     js_files.append(relative_path)
 
